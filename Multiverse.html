@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The ROI of AI: Unlocking AI Maturity Through Workforce Skills</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        :root {
+            --primary-blue: #4169e1;
+            --light-blue: #e6e9ff;
+            --highlight-green: #c6ff65;
+            --dark-navy: #1e2769;
+            --light-gray: #f5f5f7;
+            --medium-gray: #e0e0e0;
+            --text-color: #333;
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            --card-hover-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+            --gradient-blue: linear-gradient(135deg, #4169e1 0%, #6a8cff 100%);
+            --gradient-green: linear-gradient(135deg, #c6ff65 0%, #a0e641 100%);
+            --gradient-purple: linear-gradient(135deg, #9e9eff 0%, #7b7bd4 100%);
+            --gradient-header: linear-gradient(135deg, #4169e1 0%, #1e2769 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--gradient-header);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(30, 39, 105, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 80%);
+            z-index: 1;
+            animation: pulse 8s ease-in-out infinite alternate;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+CiAgPHBhdGggZD0iTTAgMHYxMDBoMTAwVjBIMHptOTQgOTRINnYtNmg4OHY2em0wLTEySDF2LTZoOTN2NnptMC0xMkg2di02aDg4djZ6bTAtMTJINnYtNmg4OHY2em0wLTEySDZ2LTZoODh2NnptMC0xMkg2di02aDg4djZ6bTAtMTJINnYtNmg4OHY2em0wLTEySDZ2LTZoODh2NnoiIGZpbGw9IiNmZmZmZmYwNSIvPgo8L3N2Zz4=');
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.4;
+            }
+            100% {
+                opacity: 0.8;
+            }
+        }
+
+        header .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        h1 .highlight {
+            background-color: var(--highlight-green);
+            color: #000;
+            padding: 0 12px;
+            border-radius: 4px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-blue) 0%, var(--highlight-green) 100%);
+            border-radius: 3px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--gradient-blue);
+            z-index: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+            z-index: -1;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--dark-navy);
+            border-bottom: 2px solid var(--highlight-green);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .stat-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 992px) {
+            .stat-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .stat-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .stat-card:nth-child(1)::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--gradient-blue);
+            z-index: 2;
+        }
+
+        .stat-card:nth-child(2)::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--gradient-green);
+            z-index: 2;
+        }
+
+        .stat-card:nth-child(3)::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--gradient-purple);
+            z-index: 2;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .stat-card:nth-child(2) i {
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-card:nth-child(3) i {
+            background: var(--gradient-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(65, 105, 225, 0.05) 0%, transparent 70%);
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--dark-navy);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 15px;
+        }
+
+        .maturity-scale {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            position: relative;
+            padding-bottom: 50px;
+        }
+
+        .maturity-stage {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+            width: 30%;
+            padding: 25px 15px;
+            border-radius: 16px;
+            background-color: white;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+
+        .maturity-stage:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .maturity-stage h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark-navy);
+            position: relative;
+            display: inline-block;
+        }
+
+        .stage-beginner {
+            background: linear-gradient(to bottom, rgba(158, 158, 255, 0.1) 0%, rgba(255, 255, 255, 1) 15%);
+        }
+
+        .stage-beginner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--gradient-purple);
+        }
+
+        .stage-beginner h4::after {
+            content: '\f135';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            font-size: 0.8em;
+            margin-left: 8px;
+            opacity: 0.8;
+        }
+
+        .stage-explorer {
+            background: linear-gradient(to bottom, rgba(65, 105, 225, 0.1) 0%, rgba(255, 255, 255, 1) 15%);
+        }
+
+        .stage-explorer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--gradient-blue);
+        }
+
+        .stage-explorer h4::after {
+            content: '\f57c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            font-size: 0.8em;
+            margin-left: 8px;
+            opacity: 0.8;
+        }
+
+        .stage-adept {
+            background: linear-gradient(to bottom, rgba(198, 255, 101, 0.1) 0%, rgba(255, 255, 255, 1) 15%);
+        }
+
+        .stage-adept::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--gradient-green);
+        }
+
+        .stage-adept h4::after {
+            content: '\f5fc';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            font-size: 0.8em;
+            margin-left: 8px;
+            opacity: 0.8;
+        }
+
+        .percentage {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin: 15px 0;
+            color: var(--dark-navy);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .stage-beginner .percentage::after {
+            background: var(--gradient-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            content: '%';
+            font-size: 1.5rem;
+            position: absolute;
+            top: 0;
+            right: -25px;
+        }
+        
+        .stage-explorer .percentage::after {
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            content: '%';
+            font-size: 1.5rem;
+            position: absolute;
+            top: 0;
+            right: -25px;
+        }
+        
+        .stage-adept .percentage::after {
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            content: '%';
+            font-size: 1.5rem;
+            position: absolute;
+            top: 0;
+            right: -25px;
+        }
+
+        .description {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background-color: var(--medium-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                        rgba(255, 255, 255, 0) 0%, 
+                        rgba(255, 255, 255, 0.4) 50%, 
+                        rgba(255, 255, 255, 0) 100%);
+            animation: shine 2s infinite;
+        }
+
+        .fill-beginner {
+            width: 22%;
+            background: var(--gradient-purple);
+        }
+
+        .fill-explorer {
+            width: 51%;
+            background: var(--gradient-blue);
+        }
+
+        .fill-adept {
+            width: 27%;
+            background: var(--gradient-green);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 30px;
+            background-color: white;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 5px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            flex: 1;
+            text-align: center;
+            background-color: transparent;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 50px;
+            font-weight: 500;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .tab::before {
+            font-size: 1em;
+            margin-right: 5px;
+        }
+
+        .tab[data-tab="maturity"]::before {
+            content: '📊';
+        }
+
+        .tab[data-tab="skills"]::before {
+            content: '🎓';
+        }
+
+        .tab[data-tab="barriers"]::before {
+            content: '🚫';
+        }
+
+        .tab.active {
+            background-color: var(--light-blue);
+            color: var(--primary-blue);
+            font-weight: 600;
+            box-shadow: 0 3px 8px rgba(65, 105, 225, 0.15);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .skills-item {
+            background-color: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .skills-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(65, 105, 225, 0.03) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .skills-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .skills-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-blue);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(65, 105, 225, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .skills-item:hover .skills-icon {
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        .skills-item:nth-child(2n) .skills-icon {
+            background: var(--gradient-green);
+            box-shadow: 0 4px 10px rgba(198, 255, 101, 0.2);
+        }
+
+        .skills-item:nth-child(3n) .skills-icon {
+            background: var(--gradient-purple);
+            box-shadow: 0 4px 10px rgba(158, 158, 255, 0.2);
+        }
+
+        .skills-info {
+            flex: 1;
+        }
+
+        .skills-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark-navy);
+        }
+
+        .skills-percent {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .percent-bar {
+            flex: 1;
+            height: 8px;
+            background-color: var(--medium-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .percent-fill {
+            height: 100%;
+            background: var(--gradient-blue);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .percent-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                        rgba(255, 255, 255, 0) 0%, 
+                        rgba(255, 255, 255, 0.4) 50%, 
+                        rgba(255, 255, 255, 0) 100%);
+            animation: shine 2s infinite;
+        }
+
+        .skills-item:nth-child(2n) .percent-fill {
+            background: var(--gradient-green);
+        }
+
+        .skills-item:nth-child(3n) .percent-fill {
+            background: var(--gradient-purple);
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .key-findings {
+            background-color: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .key-findings::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--primary-blue) 0%, var(--highlight-green) 100%);
+            z-index: 1;
+        }
+
+        .key-findings::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(65, 105, 225, 0.03) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .finding-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--medium-gray);
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .finding-item:hover {
+            transform: translateX(5px);
+        }
+
+        .finding-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .finding-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(65, 105, 225, 0.3);
+        }
+
+        .finding-item:nth-child(2) .finding-icon {
+            background: var(--gradient-green);
+            box-shadow: 0 4px 10px rgba(198, 255, 101, 0.3);
+        }
+
+        .finding-item:nth-child(3) .finding-icon {
+            background: var(--gradient-purple);
+            box-shadow: 0 4px 10px rgba(158, 158, 255, 0.3);
+        }
+
+        .action-section {
+            background: linear-gradient(135deg, var(--dark-navy) 0%, #2a3785 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 60px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(30, 39, 105, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .action-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj4KICA8Y2lyY2xlIGN4PSIyNSIgY3k9IjI1IiByPSIxIiBmaWxsPSIjZmZmZmZmMTAiLz4KPC9zdmc+');
+            z-index: 0;
+        }
+
+        .action-section h2 {
+            margin-bottom: 20px;
+        }
+
+        .action-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 992px) {
+            .action-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .action-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .action-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: left;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .action-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+            z-index: -1;
+        }
+
+        .action-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .action-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--highlight-green);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .action-title::before {
+            content: '💡';
+            margin-right: 10px;
+            font-size: 1.1em;
+        }
+
+        .action-desc {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .action-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-green);
+            color: black;
+            border-radius: 50%;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(198, 255, 101, 0.3);
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="content">
+                <h1>The <span class="highlight">ROI of AI</span></h1>
+                <p class="subtitle">Unlocking AI Maturity Through Workforce Skills</p>
+            </div>
+        </header>
+
+        <div class="key-findings">
+            <h2>✨ Key Findings</h2>
+            <div class="finding-item">
+                <div class="finding-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                        <path d="M3.5 18.5L9.5 12.5L13.5 16.5L22 6.92L20.59 5.5L13.5 13.5L9.5 9.5L2 17L3.5 18.5Z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3>AI is already paying dividends</h3>
+                    <p>4 in 5 tech leaders say implementing AI has led to an increase in revenue generation.</p>
+                </div>
+            </div>
+            <div class="finding-item">
+                <div class="finding-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                        <path d="M12 6V9L16 5L12 1V4C7.58 4 4 7.58 4 12C4 13.57 4.46 15.03 5.24 16.26L6.7 14.8C6.25 13.97 6 13.01 6 12C6 8.69 8.69 6 12 6ZM18.76 7.74L17.3 9.2C17.74 10.04 18 10.99 18 12C18 15.31 15.31 18 12 18V15L8 19L12 23V20C16.42 20 20 16.42 20 12C20 10.43 19.54 8.97 18.76 7.74Z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3>High satisfaction with AI returns</h3>
+                    <p>98% of leaders say the benefits of AI have met or exceeded their expectations.</p>
+                </div>
+            </div>
+            <div class="finding-item">
+                <div class="finding-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                        <path d="M12 3L1 9L5 11.18V17.18L12 21L19 17.18V11.18L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9ZM17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3>Training gap remains</h3>
+                    <p>51% of workers have received fewer than five hours' training on AI, with 25% opting to self-fund training.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="maturity">AI Maturity</div>
+            <div class="tab" data-tab="skills">Workforce Skills</div>
+            <div class="tab" data-tab="barriers">Adoption Barriers</div>
+        </div>
+
+        <div id="maturity" class="tab-content active">
+            <h2>AI Maturity Scale</h2>
+            <p>Organizations fall into three categories based on their AI implementation progress.</p>
+            
+            <div class="maturity-scale">
+                <div class="maturity-stage stage-beginner" id="beginner">
+                    <h4>AI Beginner</h4>
+                    <div class="percentage">22%</div>
+                    <p class="description">Proof of concept stage, developing pilot projects to test and validate initial concepts</p>
+                </div>
+                <div class="maturity-stage stage-explorer" id="explorer">
+                    <h4>AI Explorer</h4>
+                    <div class="percentage">51%</div>
+                    <p class="description">Early stage, integrating AI into specific business processes with foundational investments</p>
+                </div>
+                <div class="maturity-stage stage-adept" id="adept">
+                    <h4>AI Adept</h4>
+                    <div class="percentage">27%</div>
+                    <p class="description">Fully integrated, embedding AI throughout the organization to support strategic decision-making</p>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill fill-beginner"></div>
+                </div>
+            </div>
+
+            <div class="dashboard">
+                <div class="card">
+                    <h3>Competitive Perception</h3>
+                    <div class="chart-container">
+                        <canvas id="competitiveChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>AI Impact Metrics</h3>
+                    <div class="chart-container">
+                        <canvas id="impactChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="skills" class="tab-content">
+            <h2>AI Skills & Training</h2>
+            
+            <div class="stat-cards">
+                <div class="stat-card">
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">🧠</div>
+                    <div class="stat-value">51%</div>
+                    <div class="stat-label">Workers received less than 5 hours of AI training</div>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">📈</div>
+                    <div class="stat-value">83%</div>
+                    <div class="stat-label">Workers believe AI skills will help drive more value</div>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">💻</div>
+                    <div class="stat-value">56%</div>
+                    <div class="stat-label">Self-described "AI experts" without formal training</div>
+                </div>
+            </div>
+
+            <div class="dashboard">
+                <div class="card">
+                    <h3>How Workers Rate Their AI Skills</h3>
+                    <div class="chart-container">
+                        <canvas id="skillsChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>How Workers Gained AI Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skills-item">
+                            <div class="skills-icon">
+                                <span style="font-size: 1.5rem;">🤖</span>
+                            </div>
+                            <div class="skills-info">
+                                <div class="skills-name">Playing with ChatGPT</div>
+                                <div class="skills-percent">
+                                    <div class="percent-bar">
+                                        <div class="percent-fill" style="width: 61%"></div>
+                                    </div>
+                                    <span>61%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skills-item">
+                            <div class="skills-icon">
+                                <span style="font-size: 1.5rem;">💼</span>
+                            </div>
+                            <div class="skills-info">
+                                <div class="skills-name">Learning on the job</div>
+                                <div class="skills-percent">
+                                    <div class="percent-bar">
+                                        <div class="percent-fill" style="width: 59%"></div>
+                                    </div>
+                                    <span>59%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skills-item">
+                            <div class="skills-icon">
+                                <span style="font-size: 1.5rem;">🎓</span>
+                            </div>
+                            <div class="skills-info">
+                                <div class="skills-name">Formal training from employer</div>
+                                <div class="skills-percent">
+                                    <div class="percent-bar">
+                                        <div class="percent-fill" style="width: 45%"></div>
+                                    </div>
+                                    <span>45%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skills-item">
+                            <div class="skills-icon">
+                                <span style="font-size: 1.5rem;">🎬</span>
+                            </div>
+                            <div class="skills-info">
+                                <div class="skills-name">Watching online tutorials</div>
+                                <div class="skills-percent">
+                                    <div class="percent-bar">
+                                        <div class="percent-fill" style="width: 42%"></div>
+                                    </div>
+                                    <span>42%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skills-item">
+                            <div class="skills-icon">
+                                <span style="font-size: 1.5rem;">💳</span>
+                            </div>
+                            <div class="skills-info">
+                                <div class="skills-name">Self-funded training</div>
+                                <div class="skills-percent">
+                                    <div class="percent-bar">
+                                        <div class="percent-fill" style="width: 25%"></div>
+                                    </div>
+                                    <span>25%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skills-item">
+                            <div class="skills-icon">
+                                <span style="font-size: 1.5rem;">🏛️</span>
+                            </div>
+                            <div class="skills-info">
+                                <div class="skills-name">Traditional education</div>
+                                <div class="skills-percent">
+                                    <div class="percent-bar">
+                                        <div class="percent-fill" style="width: 18%"></div>
+                                    </div>
+                                    <span>18%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="barriers" class="tab-content">
+            <h2>Barriers to AI Adoption</h2>
+            
+            <div class="dashboard">
+                <div class="card">
+                    <h3>Top Barriers According to Tech Leaders</h3>
+                    <div class="chart-container">
+                        <canvas id="leaderBarriersChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Top Barriers According to Workers</h3>
+                    <div class="chart-container">
+                        <canvas id="workerBarriersChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>AI Skills Lacking in Organizations</h3>
+                <div class="chart-container">
+                    <canvas id="skillsLackingChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-section">
+            <h2>Recommendations for Leaders</h2>
+            <p>Based on the findings, here are three key actions for leaders to unlock AI maturity</p>
+            
+            <div class="action-cards">
+                <div class="action-card">
+                    <div class="action-number">1</div>
+                    <div class="action-title">Understand your AI maturity position</div>
+                    <p class="action-desc">Have a clear view of your goals, including potential ROI and risks. Get skills intelligence insights to understand your current gaps.</p>
+                </div>
+                <div class="action-card">
+                    <div class="action-number">2</div>
+                    <div class="action-title">Create a future-ready AI skills strategy</div>
+                    <p class="action-desc">Equip teams with skills to leverage AI. Give them tools and clear policies, and measure results across your organization.</p>
+                </div>
+                <div class="action-card">
+                    <div class="action-number">3</div>
+                    <div class="action-title">Create new career opportunities through AI skills</div>
+                    <p class="action-desc">Create access to AI skills to help workers accelerate their career progression. Consider reskilling employees into AI specialist roles.</p>
+                </div>
+            </div>
+        </div>
+
+            <footer>
+            <p>📊 Data source: Multiverse ROI of AI report, 2025</p>
+            <p>📈 Interactive dashboard created based on research conducted by Coleman Parkes with 810 tech leaders and 1,190 workers across US and UK</p>
+            <div style="margin-top: 20px;">
+                <a href="#" style="color: var(--primary-blue); text-decoration: none; margin: 0 10px;">🔗</a>
+                <a href="#" style="color: var(--primary-blue); text-decoration: none; margin: 0 10px;">📱</a>
+                <a href="#" style="color: var(--primary-blue); text-decoration: none; margin: 0 10px;">✉️</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Hide all tab content
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                // Show corresponding tab content
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Maturity scale interactivity
+        document.querySelectorAll('.maturity-stage').forEach(stage => {
+            stage.addEventListener('click', () => {
+                const id = stage.getAttribute('id');
+                document.querySelector('.progress-fill').className = 'progress-fill';
+                document.querySelector('.progress-fill').classList.add(`fill-${id}`);
+            });
+        });
+
+        // Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Competitive Perception Chart
+            const competitiveCtx = document.getElementById('competitiveChart').getContext('2d');
+            const competitiveChart = new Chart(competitiveCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['AI Beginner', 'AI Explorer', 'AI Adept'],
+                    datasets: [
+                        {
+                            label: 'Ahead of competitors',
+                            data: [25, 69, 88],
+                            backgroundColor: '#4169e1',
+                        },
+                        {
+                            label: 'Same level',
+                            data: [28, 23, 12],
+                            backgroundColor: '#c6ff65',
+                        },
+                        {
+                            label: 'Behind competitors',
+                            data: [47, 8, 0],
+                            backgroundColor: '#9e9eff',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: true,
+                        },
+                        y: {
+                            stacked: true,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Percentage (%)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Impact Metrics Chart
+            const impactCtx = document.getElementById('impactChart').getContext('2d');
+            const impactChart = new Chart(impactCtx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'Customer Experience', 
+                        'Productivity', 
+                        'Product Innovation',
+                        'Data-driven Decision Making',
+                        'Operational Efficiency',
+                        'Speed of Analysis',
+                        'Competitive Advantage'
+                    ],
+                    datasets: [
+                        {
+                            label: 'Past 12 months',
+                            data: [53, 50, 45, 42, 49, 47, 43],
+                            backgroundColor: 'rgba(65, 105, 225, 0.2)',
+                            borderColor: '#4169e1',
+                            pointBackgroundColor: '#4169e1',
+                        },
+                        {
+                            label: 'Next 3-5 years (predicted)',
+                            data: [64, 62, 56, 54, 60, 59, 57],
+                            backgroundColor: 'rgba(198, 255, 101, 0.2)',
+                            borderColor: '#c6ff65',
+                            pointBackgroundColor: '#c6ff65',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }
+                }
+            });
+
+            // Skills Chart
+            const skillsCtx = document.getElementById('skillsChart').getContext('2d');
+            const skillsChart = new Chart(skillsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Basic', 'Intermediate', 'Advanced', 'Expert'],
+                    datasets: [{
+                        data: [10, 50, 30, 10],
+                        backgroundColor: [
+                            '#9e9eff',
+                            '#4169e1',
+                            '#1e2769',
+                            '#c6ff65'
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        }
+                    }
+                }
+            });
+
+            // Leader Barriers Chart
+            const leaderBarriersCtx = document.getElementById('leaderBarriersChart').getContext('2d');
+            const leaderBarriersChart = new Chart(leaderBarriersCtx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'Unable to fully use existing AI',
+                        'Employee resistance',
+                        'Difficulty demonstrating ROI',
+                        'Lack of funding',
+                        'Lack of leadership support'
+                    ],
+                    datasets: [{
+                        label: 'Percentage',
+                        data: [63, 58, 57, 46, 43],
+                        backgroundColor: '#4169e1',
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Percentage (%)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Worker Barriers Chart
+            const workerBarriersCtx = document.getElementById('workerBarriersChart').getContext('2d');
+            const workerBarriersChart = new Chart(workerBarriersCtx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'Data privacy & security risks',
+                        'Lack of relevant skills',
+                        'Integration with existing systems',
+                        'Access to tools & technologies',
+                        'Regulatory compliance'
+                    ],
+                    datasets: [{
+                        label: 'Percentage',
+                        data: [49, 36, 34, 39, 28],
+                        backgroundColor: '#c6ff65',
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Percentage (%)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Skills Lacking Chart
+            const skillsLackingCtx = document.getElementById('skillsLackingChart').getContext('2d');
+            const skillsLackingChart = new Chart(skillsLackingCtx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'Data analytics',
+                        'Identifying AI use cases',
+                        'Implementing AI projects',
+                        'Managing AI-related changes',
+                        'Ethics and responsible use',
+                        'Risk management',
+                        'Building AI features',
+                        'Security & data governance'
+                    ],
+                    datasets: [
+                        {
+                            label: 'Tech Leaders',
+                            data: [52, 46, 48, 49, 37, 24, 26, 25],
+                            backgroundColor: '#4169e1',
+                        },
+                        {
+                            label: 'Workers',
+                            data: [52, 48, 40, 33, 36, 31, 26, 23],
+                            backgroundColor: '#c6ff65',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            ticks: {
+                                autoSkip: false,
+                                maxRotation: 45,
+                                minRotation: 45
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Percentage (%)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
